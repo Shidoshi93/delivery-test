@@ -33,32 +33,20 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children })
   };
 
   const addProduct = async (data: ProductFormData): Promise<Product> => {
-    try {
-      const newProduct = await productService.create(data);
-      setProducts(prev => [...prev, newProduct]);
-      return newProduct;
-    } catch (err) {
-      throw err;
-    }
+    const newProduct = await productService.create(data);
+    setProducts(prev => [...prev, newProduct]);
+    return newProduct;
   };
 
   const updateProduct = async (id: string, data: Partial<ProductFormData>): Promise<Product> => {
-    try {
-      const updatedProduct = await productService.update(id, data);
-      setProducts(prev => prev.map(p => (p.id === id ? updatedProduct : p)));
-      return updatedProduct;
-    } catch (err) {
-      throw err;
-    }
+    const updatedProduct = await productService.update(id, data);
+    setProducts(prev => prev.map(p => (p.id === id ? updatedProduct : p)));
+    return updatedProduct;
   };
 
   const deleteProduct = async (id: string): Promise<void> => {
-    try {
-      await productService.delete(id);
-      setProducts(prev => prev.filter(p => p.id !== id));
-    } catch (err) {
-      throw err;
-    }
+    await productService.delete(id);
+    setProducts(prev => prev.filter(p => p.id !== id));
   };
 
   useEffect(() => {
@@ -78,6 +66,7 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children })
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useProductContext = () => {
   const context = useContext(ProductContext);
   if (context === undefined) {

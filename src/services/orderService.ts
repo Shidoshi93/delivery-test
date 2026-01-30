@@ -1,7 +1,7 @@
 import { Order, CreateOrderData, OrderStatus } from '@/types/order';
 import { mockProducts } from '@/data/mockData';
 
-let mockOrders: Order[] = [];
+const mockOrders: Order[] = [];
 
 // Mock order service
 export const orderService = {
